@@ -1,5 +1,4 @@
 FROM pynguins/pyracms_core AS pyracms
-EXPOSE 6543/tcp
 
 FROM pynguins/pyracms_article AS article
 COPY --from=pyracms /code/ /code/
@@ -36,6 +35,8 @@ RUN initialize_pyracms_gallery_db production.ini
 RUN initialize_pyracms_pycode_db production.ini
 
 RUN apt-get clean
+
+EXPOSE 6543/tcp
 
 ENTRYPOINT [ "pserve" ]
 CMD [ "production_all.ini" ]
