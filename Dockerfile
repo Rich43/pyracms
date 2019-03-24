@@ -28,11 +28,11 @@ WORKDIR /code/pycode
 RUN python setup.py install
 
 WORKDIR /code/pyracms
-RUN initialize_pyracms_db production.ini
-RUN initialize_pyracms_article_db production.ini
-RUN initialize_pyracms_forum_db production.ini
-RUN initialize_pyracms_gallery_db production.ini
-RUN initialize_pyracms_pycode_db production.ini
+RUN initialize_pyracms_db production_all.ini
+RUN initialize_pyracms_article_db production_all.ini
+RUN initialize_pyracms_forum_db production_all.ini
+RUN initialize_pyracms_gallery_db production_all.ini
+RUN initialize_pyracms_pycode_db production_all.ini
 
 RUN apt-get clean
 
