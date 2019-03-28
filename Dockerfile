@@ -1,31 +1,20 @@
 FROM pynguins/pyracms_core AS pyracms
 
 FROM pynguins/pyracms_article AS article
-COPY --from=pyracms /code/ /code/
-COPY --from=pyracms /usr/local/ /usr/local/
+COPY --from=pyracms /code/pyracms/dist/ /code/
+COPY --from=pyracms /code/pyracms/*.ini /code/pyracms/
 
 FROM pynguins/pyracms_forum AS forum
-COPY --from=article /code/ /code/
-COPY --from=article /usr/local/ /usr/local/
+COPY --from=article /code/article/dist/ /code/
 
 FROM pynguins/pyracms_gallery AS gallery
-COPY --from=forum /code/ /code/
-COPY --from=forum /usr/local/ /usr/local/
+COPY --from=forum /code/forum/dist/ /code/
 
 FROM pynguins/pyracms_pycode AS pycode
-COPY --from=gallery /code/ /code/
-COPY --from=gallery /usr/local/ /usr/local/
+COPY --from=gallery /code/gallery/dist/ /code/
 
-WORKDIR /code/pyracms
-RUN python setup.py install
-WORKDIR /code/article
-RUN python setup.py install
-WORKDIR /code/forum
-RUN python setup.py install
-WORKDIR /code/gallery
-RUN python setup.py install
-WORKDIR /code/pycode
-RUN python setup.py install
+WORKDIR /code/
+RUN find -maxdepth 1 -type f -name '*.whl' -exec pip install {} \;
 
 WORKDIR /code/pyracms
 RUN initialize_pyracms_db production_all.ini
