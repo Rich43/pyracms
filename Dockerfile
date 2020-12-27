@@ -28,8 +28,9 @@ WORKDIR /code/pycode
 RUN python setup.py install
 
 RUN mkdir -p /code/db
+RUN cp -fv /code/pyracms/production_all.ini /code/db/
 
-WORKDIR /code/pyracms
+WORKDIR /code/db
 RUN initialize_pyracms_db production_all.ini
 RUN initialize_pyracms_article_db production_all.ini
 RUN initialize_pyracms_forum_db production_all.ini
