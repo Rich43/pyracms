@@ -3,7 +3,7 @@ services:
   pyracms:
     image: pynguins/pyracms:latest
     ports:
-      - 6543:6543
+      - 80:6543
     volumes:
       - pyracms_static:/usr/local/lib/python3.7/site-packages/pyracms-0.0-py3.7.egg/pyracms/static
       - pyracms_templates:/usr/local/lib/python3.7/site-packages/pyracms-0.0-py3.7.egg/pyracms/templates

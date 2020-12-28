@@ -10,8 +10,8 @@ metadata:
   name: pyracms
 spec:
   ports:
-  - name: "6543"
-    port: 6543
+  - name: "80"
+    port: 80
     targetPort: 6543
   type: LoadBalancer
   selector:
