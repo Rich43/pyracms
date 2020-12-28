@@ -8,6 +8,23 @@ services:
       - pyracms_static:/usr/local/lib/python3.7/site-packages/pyracms-0.0-py3.7.egg/pyracms/static
       - pyracms_templates:/usr/local/lib/python3.7/site-packages/pyracms-0.0-py3.7.egg/pyracms/templates
       - pyracms_database:/code/db
+  vsftpd:
+    image: fauria/vsftpd:latest
+    ports:
+      - "20:20"
+      - "21:21"
+      - "21100-21110:21100-21110"
+    environment:
+      FTP_USER: root
+      FTP_PASS: Password1
+      PASV_MIN_PORT: 21100
+      PASV_MAX_PORT: 21110
+    volumes:
+      - pyracms_static:/home/vsftpd/root/static
+      - pyracms_templates:/home/vsftpd/root/templates
+      - pyracms_database:/home/vsftpd/root/db
+    depends_on:
+      - pyracms
 volumes:
   pyracms_static:
   pyracms_templates:
