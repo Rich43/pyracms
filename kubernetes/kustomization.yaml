@@ -1,0 +1,8 @@
+resources:
+  - pyracms-database-persistentvolumeclaim.yaml
+  - pyracms-static-persistentvolumeclaim.yaml
+  - pyracms-templates-persistentvolumeclaim.yaml
+  - pyracms-service.yaml
+  - vsftpd-service.yaml
+  - pyracms-deployment.yaml
+  - vsftpd-deployment.yaml

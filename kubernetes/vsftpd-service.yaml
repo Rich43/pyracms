@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: vsftpd
+  name: vsftpd
+spec:
+  ports:
+  - name: "20"
+    port: 20
+    targetPort: 20
+  - name: "21"
+    port: 21
+    targetPort: 21
+  - name: "21100"
+    port: 21100
+    targetPort: 21100
+  - name: "21101"
+    port: 21101
+    targetPort: 21101
+  - name: "21102"
+    port: 21102
+    targetPort: 21102
+  - name: "21103"
+    port: 21103
+    targetPort: 21103
+  - name: "21104"
+    port: 21104
+    targetPort: 21104
+  - name: "21105"
+    port: 21105
+    targetPort: 21105
+  - name: "21106"
+    port: 21106
+    targetPort: 21106
+  - name: "21107"
+    port: 21107
+    targetPort: 21107
+  - name: "21108"
+    port: 21108
+    targetPort: 21108
+  - name: "21109"
+    port: 21109
+    targetPort: 21109
+  - name: "21110"
+    port: 21110
+    targetPort: 21110
+  type: LoadBalancer
+  selector:
+    io.kompose.service: vsftpd
+status:
+  loadBalancer: {}

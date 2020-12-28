@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: vsftpd
+  name: vsftpd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: vsftpd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: vsftpd
+    spec:
+      containers:
+      - env:
+        - name: FTP_PASS
+          value: Password1
+        - name: FTP_USER
+          value: root
+        - name: PASV_MAX_PORT
+          value: "21110"
+        - name: PASV_MIN_PORT
+          value: "21100"
+        image: fauria/vsftpd:latest
+        imagePullPolicy: ""
+        name: vsftpd
+        ports:
+        - containerPort: 20
+        - containerPort: 21
+        - containerPort: 21100
+        - containerPort: 21101
+        - containerPort: 21102
+        - containerPort: 21103
+        - containerPort: 21104
+        - containerPort: 21105
+        - containerPort: 21106
+        - containerPort: 21107
+        - containerPort: 21108
+        - containerPort: 21109
+        - containerPort: 21110
+        resources: {}
+        volumeMounts:
+        - mountPath: /home/vsftpd/root/static
+          name: pyracms-static
+        - mountPath: /home/vsftpd/root/templates
+          name: pyracms-templates
+        - mountPath: /home/vsftpd/root/db
+          name: pyracms-database
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: pyracms-static
+        persistentVolumeClaim:
+          claimName: pyracms-static
+      - name: pyracms-templates
+        persistentVolumeClaim:
+          claimName: pyracms-templates
+      - name: pyracms-database
+        persistentVolumeClaim:
+          claimName: pyracms-database
+status: {}
